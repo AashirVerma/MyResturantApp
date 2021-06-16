@@ -1,0 +1,152 @@
+﻿@model Tuple<IEnumerable<SelectListItem>, IEnumerable<SelectListItem>, IEnumerable<SelectListItem>>
+@{
+    ViewBag.Title = "Index";
+    //  Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<style>
+    fieldset {
+        border: 1px solid #ddd !important;
+        margin: 0;
+        padding: 10px;
+        position: relative;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        padding-left: 10px !important;
+    }
+
+    legend {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        width: 35%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px 5px 5px 10px;
+        background-color: #ffffff;
+    }
+</style>
+<fieldset>
+    <legend>
+        Resturant
+    </legend>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    Customer:
+                    @Html.DropDownList(name: "Customer", selectList: new SelectList(Model.Item1, dataValueField: "Value", dataTextField: "Text"),
+                   htmlAttributes: new { @class = "form-control" })
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    PaymentType:
+                    @Html.DropDownList(name: "PaymentType", selectList: new SelectList(Model.Item3, dataValueField: "Value", dataTextField: "Text"),
+                   htmlAttributes: new { @class = "form-control" })
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>
+        Resturant Items
+    </legend>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    item:
+                    @Html.DropDownList(name: "Item", selectList: new SelectList(Model.Item2, dataValueField: "Value", dataTextField: "Text"),
+               htmlAttributes: new { @class = "form-control" })
+
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    Unit Price:
+                    <input type="text" readonly="readonly" id="txtUnitprice" value="0.00" name="UnitPrice" class="form-control" />
+
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    Quantity:
+                    <input type="text" readonly="readonly" id="txtquantity" value="0.00" name="quantity" class="form-control" />
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    Discount:
+                    <input type="text" id="txtDiscount" value="0.00" name="Discount" class="form-control" />
+
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    Total:
+                    <input type="text" readonly="readonly" id="txtTotal" value="0.00" name="Total" class="form-control" />
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="button" style="margin-top:20px" value="Add to the List" name="AddToList" id="BtnAddToList" class="btn btn-success" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</fieldset>
+<fieldset>
+    <legend>Listed Items</legend>
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Item Id
+                </th>
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    UnitPrice
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Discount
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+
+    </table>
+</fieldset>
+
+
