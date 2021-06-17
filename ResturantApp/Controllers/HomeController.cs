@@ -1,4 +1,5 @@
-﻿using ResturantApp.Repositry;
+﻿using ResturantApp.Models;
+using ResturantApp.Repositry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace ResturantApp.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private ResturantDbEntities objs;
+        public HomeController()
+        {
+            objs = new ResturantDbEntities(); 
+        }
         // GET: Home
         public ActionResult Index()
         {
@@ -21,5 +27,12 @@ namespace ResturantApp.Controllers
                 (cus.GetAllCustomers(), It.GetAllItems(), pay.GetAll());
             return View(objMultipleModels);
         }
+        [HttpGet]
+        public JsonResult GetUnitPrice(int itemid)
+        {
+            double unitprice = (double)objs.Items.Single(m => m.Itemid == itemid).ItemPrice;
+            return Json(unitprice, JsonRequestBehavior.AllowGet);
+        }
     }
+    
 }

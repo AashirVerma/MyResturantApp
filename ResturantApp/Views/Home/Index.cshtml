@@ -5,6 +5,59 @@
 
 }
 <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+    $ (document).ready(function () {
+        $("#Item").val(0);
+        $("#Item").change( function(){
+            var itemid = ("$Item").val();
+            GetUnitPrice(itemid);
+
+        })
+        $("input[type=text]").change(function ()
+        {
+            calculateSubTotal();
+        })
+    });
+     
+    
+        function calculateSubTotal()
+        {
+            var unitprice = $("#txtUnitprice").val();
+            var quantity = $("#txtquantity").val();
+            var discount = $("#txtDiscount").val();
+            var Total = (unitprice * quantity) - discount;
+            $("#txtTotal").val(parseFloat(Total).toFixed(2));
+
+        }
+
+            function GetUnitPrice(itemid)
+    {
+        $.ajax({
+            async: true,
+            type: 'Get',
+            data: 'JSON',
+            contenttype: 'application/json;charset-8',
+            data: {itemid,itemid},
+            url:'/home/getItemUnitPrice',
+            success: function (data) {
+                $('#txtUnitprice')
+
+            },
+            error: function () {
+                alert("there is some problem to get the unit price")
+            }
+
+        })
+
+ }
+          
+   
+
+        
+
+
+</script>
 <style>
     fieldset {
         border: 1px solid #ddd !important;
@@ -71,7 +124,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     Unit Price:
-                    <input type="text" readonly="readonly" id="txtUnitprice" value="0.00" name="UnitPrice" class="form-control" />
+                    <input type="text"  id="txtUnitprice" value="0.00" name="UnitPrice" class="form-control" />
 
                 </div>
 
@@ -80,7 +133,7 @@
                 <div class="form-group">
 
                     Quantity:
-                    <input type="text" readonly="readonly" id="txtquantity" value="0.00" name="quantity" class="form-control" />
+                    <input type="text"  id="txtquantity" value="0.00" name="quantity" class="form-control" />
                 </div>
 
             </div>
